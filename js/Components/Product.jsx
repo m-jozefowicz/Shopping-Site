@@ -59,8 +59,6 @@ class Product extends React.Component {
        }
    }
 
-
-
    render() {
        return (
          <div className="row">
@@ -91,7 +89,7 @@ class Product extends React.Component {
                      }
                     {
                       this.state.success ? <span className="alert alert-success">
-                                              This product added to you cart
+                                              Dodano bukiet do twojego koszyka!
                                            </span> : null
                     }
                  </div>

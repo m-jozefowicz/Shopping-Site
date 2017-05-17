@@ -5,10 +5,10 @@ class AddToCartForm extends React.Component {
         return (
           <div>
             <input type="number" min="1" max={this.props.quantity}
-            onChange={this.props.qntHandleChange}/> from {this.props.quantity}<br/>
+            onChange={this.props.qntHandleChange}/> z {this.props.quantity}<br/>
             <button type="button" className="btn btn-warning btn-lg"
             onClick={this.props.btnHandleClick}>
-                Add to cart
+                Dodaj do koszyka
             </button>
           </div>
         )

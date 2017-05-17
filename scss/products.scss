@@ -30,8 +30,13 @@
     font-size: 24px;
   }
   .show-product-button{
+    width: 100px;
     float: right;
     margin: -5% 0 0 0;
+    background-color: #F7A56A;
+    &:hover{
+      background-color: #E7A56A;
+    }
   }
   .price{
     margin-left: 15px;
@@ -42,4 +47,23 @@
   .price{
     margin-left: 10px;
   }
+}
+
+textarea{
+  resize: none;
+}
+
+.myBtn{
+  display: block;
+  margin-left: 150px;
+  background-color: #F7A56A;
+  &:hover{
+    background-color: #E7A56A;
+  }
+}
+
+.delete-btn{
+  width: 60px;
+  margin-top: 45px;
+  margin-right: -100px;
 }

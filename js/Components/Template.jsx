@@ -5,6 +5,7 @@ import {Link, IndexLink} from 'react-router'
 class Template extends React.Component {
 
   componentDidMount() {
+
     if (!localStorage.getItem('cart')) {
       fetch(config.apiUrl + '/createCart')
         .then(response => response.json())
@@ -17,7 +18,7 @@ class Template extends React.Component {
     render() {
         return (
           <div>
-              <nav className="navbar navbar-default">
+              <nav className="navbar navbar-default my-header">
                   <div className="container-fluid">
                       <div className="navbar-header">
                           <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -26,13 +27,13 @@ class Template extends React.Component {
                               <span className="icon-bar"></span>
                               <span className="icon-bar"></span>
                           </button>
-                          <IndexLink className="navbar-brand" to="/">Beautiful FLOWERS </IndexLink>
+                          <IndexLink className="navbar-brand whitexx white-font" to="/"> Przepiękne KWIATY </IndexLink>
                       </div>
                       <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                           <ul className="nav navbar-nav">
-                              <li><Link to='/products'>Products <span className="sr-only">(current)</span></Link></li>
-                              <li><Link to='/orders'>Orders</Link></li>
-                              <li><Link to='/contact'>Contact</Link></li>
+                              <li><Link to='/products'>Produkty <span className="sr-only">(current)</span></Link></li>
+                              <li><Link to='/orders'>Zamówienia</Link></li>
+                              <li><Link to='/contact'>Kontakt</Link></li>
                           </ul>
                           <ul className="nav navbar-nav navbar-right">
                               <li><Link to={'/cart/' + localStorage.getItem('cart')}>
@@ -42,13 +43,14 @@ class Template extends React.Component {
                       </div>
                   </div>
               </nav>
+
               <div className="container">
                 {this.props.children}
               </div>
 
-              <footer className="navbar navbar-inverse navbar-fixed-bottom">
-                  <div className="container-fluid">
-                    Copyright &copy; 2017. Created by WRO_FRO_5 Coders Lab
+              <footer className="navbar navbar-inverse navbar-fixed-bottom my-header">
+                  <div className="container-fluid text-center ">
+                    <p className="footer-txt">Copyright &copy; 2017. Created by WRO_FRO_5 Coders Lab</p>
                   </div>
               </footer>
 

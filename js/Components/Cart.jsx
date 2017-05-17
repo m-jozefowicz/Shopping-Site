@@ -3,9 +3,11 @@ import config from '../config.js'
 import TableRows from "./Libraries/TableRows.jsx"
 import CartTableRows from "./Libraries/CartTableRows.jsx"
 
+import { hashHistory } from 'react-router'
+
 class Cart extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             products: []
         }
@@ -14,19 +16,21 @@ class Cart extends React.Component {
     componentWillMount() {
         fetch(config.apiUrl + '/getCart/' + localStorage.getItem('cart'))
         .then( response => response.json())
-        .then(responseJson => { console.log(responseJson.items);
+        .then(responseJson => {
+          if(responseJson.items.length > 0) {
             this.setState({
-                products: responseJson.items
+              products: responseJson.items
             })
+            this.hasData = true;
+          }
         })
-
     }
 
     componentDidMount() {
       this.hasData = false
-        if(this.state.products !== []) {
-            this.hasData = true
-        }
+      if(this.state.products  !== []) {
+        this.hasData = true
+      }
     }
 
     countAllElements = () => {
@@ -34,13 +38,17 @@ class Cart extends React.Component {
       this.state.products.forEach(element => {
         sum+= parseInt(element.price)
       })
+      return sum
     }
 
       handleDeleteClick = (event) => {
-        if(confirm("Do you rly want delete this item?")) {
+        if(confirm("Czy naprawdę chcesz usunąć zamówienie z koszyka?")) {
           fetch(config.apiUrl + "/cart/delete/" + event.target.dataset.id)
           .then(response => response.json())
           .then(responseJson => {
+            if(responseJson.items.length === 0) {
+              this.hasData = false
+            }
             this.setState({
               products: responseJson.items
             })
@@ -48,6 +56,9 @@ class Cart extends React.Component {
         }
       }
 
+      handleOrderClick= () => {
+        hashHistory.push('/cart/' + this.props.params.id + '/form')
+      }
 
     render() {
         return (
@@ -67,17 +78,23 @@ class Cart extends React.Component {
                                         photo={element.product.product_images[0].url}
                                         productSum={element.quantity *element.product.price}
                                         deleteButton={this.handleDeleteClick} />
-                        }) : null
+                        }) : <tr><td><h2>Twój koszyk jest pusty</h2></td></tr>
                     }
 
                     </tbody>
                   </table>
                   <div className="totalPrice">
-                    Do zapłaty: {this.countAllElements()}
+                    Do zapłaty: {this.countAllElements()} zł
+                    {
+                      this.state.products.length > 0 ? <button type="button"
+                                                               className="btn btn-success myBtn"
+                                                               onClick={this.handleOrderClick}>
+                                                          Dalej!
+                                                        </button> : null
+                    }
+
                   </div>
-
               </div>
-
           </div>
         )
     }

@@ -20,8 +20,9 @@ class CartTableRows extends React.Component {
           <span className="productSum">
             Suma: {this.props.productSum} zł
           </span>
-          <button onClick={this.props.deleteButton} data-id={this.props.id} className="btn btn-info show-product-button">
-            Delete
+          <button onClick={this.props.deleteButton} data-id={this.props.id}
+                  className="btn btn-info show-product-button delete-btn">
+            Usuń
           </button>
         </td>
       </tr>

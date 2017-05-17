@@ -27,7 +27,7 @@ class TableRows extends React.Component {
              {this.props.description.substr(0,30) + '...'}
           </p>
           <Link to={'/product/' + this.props.id} className="btn btn-info show-product-button">
-            Show
+            Pokaż
           </Link>
         </td>
       </tr>
